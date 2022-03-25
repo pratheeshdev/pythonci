@@ -10,7 +10,7 @@ on:
     branches: [ main ]
 env:
   aws_access_key_id: AKIASBRND42OQJVPSAPJ
-  aws_secret_access_key: 9ZSqJQLjJftP4bmZ\+SyG3\+bzPCMi1OqZqRgVY\+G8
+  aws_secret_access_key: 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
   role_arn: arn:aws:iam::140754806429:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS
   
 jobs:
@@ -53,6 +53,9 @@ jobs:
     - name: Setup EKS
       run: |
         # stop the build if there are Python syntax errors or undefined names
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
         curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
         sudo mv /tmp/eksctl /usr/local/bin
         eksctl version
