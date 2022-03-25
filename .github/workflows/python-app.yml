@@ -8,7 +8,10 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
+env:
+  aws_access_key_id: ${{ secrets.aws_access_key_id }}
+  aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
+  
 jobs:
   build:
 
@@ -36,14 +39,7 @@ jobs:
       run: |
         # stop the build if there are Python syntax errors or undefined names
         docker build . -t myapi:${{ github.run_number }}
-        
-    - name: Setup EKS
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-        sudo mv /tmp/eksctl /usr/local/bin
-        eksctl version
-        
+
     - name: Setup Kubectl
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -52,4 +48,11 @@ jobs:
         chmod +x kubectl
         mkdir -p ~/.local/bin
         mv ./kubectl ~/.local/bin/kubectl
-        kubectl version        
+        
+    - name: Setup EKS
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+        sudo mv /tmp/eksctl /usr/local/bin
+        eksctl version
+        eksctl create cluster -f quin.yaml
