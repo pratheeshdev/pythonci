@@ -9,8 +9,8 @@ on:
   pull_request:
     branches: [ main ]
 env:
-  aws_access_key_id: ${{ secrets.aws_access_key_id }}
-  aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
+  aws_access_key_id: AKIASBRND42OQJVPSAPJ
+  aws_secret_access_key: 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
   
 jobs:
   build:
