@@ -9,8 +9,8 @@ on:
   pull_request:
     branches: [ main ]
 env:
-  aws_access_key_id: AKIASBRND42OQJVPSAPJ
-  aws_secret_access_key: 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
+  aws_access_key_id: 'AKIASBRND42OQJVPSAPJ'
+  aws_secret_access_key: '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'
   role_arn: arn:aws:iam::140754806429:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS
   
 jobs:
